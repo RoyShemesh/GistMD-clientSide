@@ -4,7 +4,7 @@ import RSPhoto from '../../../styles/img/myPhoto.jpg';
 
 export default function WhoAmI() {
 	return (
-		<div className="max-w-screen-xl px-4 mx-auto md:px-8 flex flex-col items-center">
+		<div className="max-w-screen-xl mt-10 font-thin px-4 mx-auto md:px-8 flex flex-col items-center">
 			<div className="mb-10 md:mb-16">
 				<h2
 					id="WhoAmI"
