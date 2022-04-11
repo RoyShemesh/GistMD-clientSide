@@ -16,7 +16,7 @@ export default function WhoAmI() {
 				<p className="max-w-screen-md mx-auto text-center text-gray-500 md:text-lg">
 					Teamplayer, capable of forming strong bonds with people of all backgrounds whilst
 					consistently performing as a team member. Quick and eager learner, striving to better
-					myself on a professional and personal level
+					myself on a professional and personal level.
 				</p>
 			</div>
 

@@ -4,8 +4,7 @@ import axios from 'axios';
 import { BASEURL } from '../../../utils/config';
 import { Patient } from '../../../utils/interface';
 
-export default function Patients() {
-	const [patients, setPatients] = useState<Patient[]>([]);
+export default function Patients({ setModal, setPatients, patients }: Props) {
 	useEffect(() => {
 		const fetchData = async () => {
 			const fetchedPatients = await axios.get(`${BASEURL}/patients/getAll`);
@@ -19,15 +18,32 @@ export default function Patients() {
 		}
 	}, []);
 	return (
-		<div className="flex flex-col mt-20 md:flex-wrap md:flex-row  justify-center items-center ">
-			{patients.map((patient) => (
-				<EachPatient
-					age={patient.age}
-					gender={patient.gender}
-					language={patient.language}
-					surgeryName={patient.surgeryName}
-				/>
-			))}
+		<div className="flex flex-col mt-20 md:items-center ">
+			<button
+				className="m-2 text-lg font-thin transition md:w-1/4 ease-in-out duration-150 shadow bg-blue-400 md:transform hover:scale-110  focus:outline-none text-white  py-2 px-4 rounded"
+				type="button"
+				onClick={() => {
+					setModal(true);
+				}}
+			>
+				Enter new patient
+			</button>
+			<div className="flex flex-col md:flex-wrap md:flex-row  justify-center items-center ">
+				{patients.map((patient) => (
+					<EachPatient
+						age={patient.age}
+						gender={patient.gender}
+						language={patient.language}
+						surgeryName={patient.surgeryName}
+					/>
+				))}
+			</div>
 		</div>
 	);
+}
+
+interface Props {
+	setModal: (Modal: boolean) => void;
+	setPatients: (Patients: Patient[]) => void;
+	patients: Patient[];
 }
