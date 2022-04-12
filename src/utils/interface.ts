@@ -3,4 +3,5 @@ export interface Patient {
 	gender: string;
 	language: string;
 	surgeryName: string;
+	_id: string;
 }

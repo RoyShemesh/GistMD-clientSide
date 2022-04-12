@@ -3,7 +3,8 @@ import EachPatient from './EachPatient';
 import axios from 'axios';
 import { BASEURL } from '../../../utils/config';
 import { Patient } from '../../../utils/interface';
-
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 export default function Patients({ setModal, setPatients, patients }: Props) {
 	useEffect(() => {
 		const fetchData = async () => {
@@ -17,6 +18,16 @@ export default function Patients({ setModal, setPatients, patients }: Props) {
 			console.log(error);
 		}
 	}, []);
+
+	const deletePatient = async (_id: string) => {
+		try {
+			await axios.delete(`${BASEURL}/patients`, { data: { patientId: _id } });
+			setPatients(patients.filter((patient) => patient._id !== _id));
+		} catch (error) {
+			const notyf = new Notyf();
+			notyf.error('Error occured');
+		}
+	};
 	return (
 		<div className="flex flex-col mt-20 md:items-center ">
 			<button
@@ -30,12 +41,7 @@ export default function Patients({ setModal, setPatients, patients }: Props) {
 			</button>
 			<div className="flex flex-col md:flex-wrap md:flex-row  justify-center items-center ">
 				{patients.map((patient) => (
-					<EachPatient
-						age={patient.age}
-						gender={patient.gender}
-						language={patient.language}
-						surgeryName={patient.surgeryName}
-					/>
+					<EachPatient key={patient._id} patient={patient} deletePatient={deletePatient} />
 				))}
 			</div>
 		</div>
