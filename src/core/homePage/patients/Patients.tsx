@@ -15,7 +15,8 @@ export default function Patients({ setModal, setPatients, patients }: Props) {
 		try {
 			fetchData();
 		} catch (error) {
-			console.log(error);
+			const notyf = new Notyf();
+			notyf.error('Error occured');
 		}
 	}, []);
 

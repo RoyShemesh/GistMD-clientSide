@@ -32,8 +32,6 @@ export default function Login({ setModal, setPatients, patients }: Props) {
 	const addPatient = async () => {
 		try {
 			if (!age || !language || !gender || !surgeryName) throw new Error('Fill all data');
-			console.log();
-
 			const { data } = await axios.put(`${BASEURL}/patients/newPatient`, {
 				age,
 				language,
@@ -41,11 +39,9 @@ export default function Login({ setModal, setPatients, patients }: Props) {
 				surgeryName,
 			});
 			setModal(false);
-			console.log(data);
 			setPatients([...patients, data]);
 		} catch (error) {
-			console.log(error);
-			notyf.error('error occured');
+			notyf.error('Fill all data');
 		}
 	};
 	return (
